@@ -1,5 +1,3 @@
 package models
 
-object PostDao {
-  
-}
+object PostDao {}

@@ -1,6 +1,6 @@
 package models
 
-import java.time.{LocalDateTime, ZonedDateTime}
+import java.time.ZonedDateTime
 
 object Dao {
   var users: Seq[User] = Seq(
@@ -14,7 +14,7 @@ object Dao {
       ZonedDateTime.parse("2023-12-29T11:00:11Z"),
       "My beautiful image",
       Seq(
-        Comment("user2", "Wow!"),
+        Comment("user2", "Wow!")
       )
     )
   )
