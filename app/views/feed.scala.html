@@ -1,0 +1,17 @@
+@(posts: Seq[Post])
+
+@main("Feed") {
+    <h1>Feed</h1>
+    <div style="display: flex;
+        gap: 10px">
+        <div>Filter by date</div>
+        <div>Filter by # likes</div>
+    </div>
+    <table >
+        <tbody>
+        @for(post <- posts) {
+            @feedPost(post)
+        }
+        </tbody>
+    </table>
+}

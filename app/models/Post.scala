@@ -9,4 +9,7 @@ case class Post(
     createdAt: ZonedDateTime,
     description: String,
     comments: Seq[Comment]
-) {}
+) {
+  
+  def userHasLiked(username: String): Boolean = likes.exists(_.user == user)
+}

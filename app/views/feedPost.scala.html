@@ -1,0 +1,41 @@
+@import utils.*
+
+@(post: Post)
+
+<div style="display: flex;
+    justify-content: space-evenly;
+    align-items: start;
+    align-content: start">
+    <div >
+        <h2>Description</h2>
+        <p>@post.description</p>
+    </div>
+    <div>
+        <div>
+            <div title="@displayDateTime(post.createdAt)">@displayDate(post.createdAt) by @post.user</div>
+            <img src="@routes.Assets.versioned(post.imagePath)" width="400px" alt="placeholder"/>
+        </div>
+    </div>
+    <div>
+        <div>
+            <h2>Comments</h2>
+            <div style="display: flex;
+                align-items: center">
+                <div>@post.likes.length </div>
+                @if(post.userHasLiked("test")) {
+                    @LikeButton()
+                } else {
+                    @LikeButtonLiked()
+                }
+            </div>
+        </div>
+        <div>
+
+            <div>
+            @for(comment <- post.comments) {
+                <div>@comment.user: @comment.content</div>
+            }
+            </div>
+        </div>
+    </div>
+</div>
