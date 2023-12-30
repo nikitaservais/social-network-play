@@ -9,4 +9,8 @@ object UserDao {
   def create(user: User): Unit = {
     users = users :+ user
   }
+
+  def find(username: String): Option[User] = {
+    users.find(u => u.username == username)
+  }
 }
