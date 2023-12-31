@@ -24,9 +24,11 @@ class Post(
     likes = likes :+ Like(username)
   }
 
-  def removeLike(username: String): Seq[Like] = {
-    likes.filterNot(_.user == username)
+  def removeLike(username: String): Unit = {
+    likes = likes.filterNot(_.user == username)
   }
 
-  def hasUserLiked(username: String): Boolean = likes.exists(_.user == user)
+  def hasUserLiked(username: String): Boolean = {
+    likes.exists(_.user == username)
+  }
 }

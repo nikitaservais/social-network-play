@@ -4,19 +4,18 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET         /                            controllers.HomeController.index()
+GET         /                     controllers.HomeController.index()
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file         controllers.Assets.versioned(path="/public", file: Asset)
 
-GET         /register                    controllers.RegisterController.register()
-POST        /register                    controllers.RegisterController.registerSubmit()
+GET         /register             controllers.RegisterController.register()
+POST        /register             controllers.RegisterController.registerSubmit()
 
-GET         /login                       controllers.LoginController.login()
-POST        /login                       controllers.LoginController.processLogin()
+GET         /login                controllers.LoginController.login()
+POST        /login                controllers.LoginController.processLogin()
 
-GET         /feed                        controllers.FeedController.index()
+GET         /feed                 controllers.FeedController.index()
 
-GET         /post/:id                    controllers.PostController.index(id: Long)
-POST        /post/:id/add-like           controllers.PostController.addLike(id: Long)
-POST        /post/:id/remove-like        controllers.PostController.removeLike(id: Long)
+GET         /post/:id             controllers.PostController.index(id: Long)
+POST        /post/:id/like        controllers.PostController.pressedLike(id: Long)

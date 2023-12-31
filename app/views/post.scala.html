@@ -1,6 +1,6 @@
 @import utils.*
 
-@(post: Post)
+@(post: Post)(implicit request: RequestHeader)
 <div style="display: flex;
     justify-content: space-evenly;
     align-items: start;
@@ -21,13 +21,14 @@
             <div style="display: flex;
                 align-items: center">
                 <div>@post.getLikes.length </div>
-                <a href="@routes.PostController.addLike(post.getId)">
-                @if(post.hasUserLiked("test")) {
-                    @likeButton()
-                } else {
-                    @likeButtonLiked()
+                @helper.form(action = routes.PostController.pressedLike(post.getId)) {
+                    @helper.CSRF.formField
+                    @if(post.hasUserLiked("test")) {
+                        @likeButtonLiked()
+                    } else {
+                        @likeButton()
+                    }
                 }
-                </a>
             </div>
         </div>
         <div>
