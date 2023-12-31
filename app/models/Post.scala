@@ -9,9 +9,8 @@ class Post(
     imagePath: String,
     createdAt: ZonedDateTime,
     description: String,
-    comments: Seq[Comment]
+    var comments: Seq[Comment]
 ) {
-
   def getId: Long = id
   def getUser: String = user
   def getLikes: Seq[Like] = likes
@@ -30,5 +29,13 @@ class Post(
 
   def hasUserLiked(username: String): Boolean = {
     likes.exists(_.user == username)
+  }
+
+  def addComment(comment: Comment): Unit = {
+    comments = comments :+ comment
+  }
+
+  def removeComment(index: Int): Unit = {
+    comments = comments.take(index) ++ comments.drop(index + 1)
   }
 }

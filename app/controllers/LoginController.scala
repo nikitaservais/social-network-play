@@ -12,8 +12,6 @@ class LoginController @Inject() (
     cc: MessagesControllerComponents
 ) extends MessagesAbstractController(cc) {
 
-  private val logger = play.api.Logger(this.getClass)
-
   val form: Form[User] = Form(
     mapping(
       "username" -> nonEmptyText,

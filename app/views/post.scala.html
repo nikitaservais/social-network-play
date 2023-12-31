@@ -12,7 +12,7 @@
         </div>
     </div>
     <div>
-        <div >
+        <div>
             <h2>Description</h2>
             <p>@post.getDescription</p>
         </div>
@@ -36,8 +36,12 @@
                 @for(comment <- post.getComments) {
                     <div>@comment.user: @comment.content</div>
                 }
-            <label for="comment"></label>
-            <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment"></textarea>
+                @helper.form(action = routes.PostController.addComment(post.getId)) {
+                    @helper.CSRF.formField
+                    <label for="comment"></label>
+                    <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment"></textarea>
+                    <button type="submit">Submit Comment</button>
+                }
             </div>
         </div>
     </div>
