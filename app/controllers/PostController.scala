@@ -1,12 +1,7 @@
 package controllers
 
 import models.{Comment, PostDao}
-import play.api.mvc.{
-  Action,
-  AnyContent,
-  MessagesAbstractController,
-  MessagesControllerComponents
-}
+import play.api.mvc.{Action, AnyContent, MessagesAbstractController, MessagesControllerComponents}
 
 import javax.inject.{Inject, Singleton}
 
@@ -48,5 +43,16 @@ class PostController @Inject() (
       }
       case None => NotFound("Not Found")
     }
+  }
+
+  def removeComment(id: Long, commentIndex: Int): Action[AnyContent] = Action {
+    implicit request =>
+      PostDao.getById(id) match {
+        case Some(post) => {
+          post.removeComment(commentIndex)
+          Redirect(routes.PostController.index(id))
+        }
+        case None => NotFound("Not Found")
+      }
   }
 }

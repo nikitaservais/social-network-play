@@ -32,15 +32,35 @@
             </div>
         </div>
         <div>
-            <div>
-                @for(comment <- post.getComments) {
-                    <div>@comment.user: @comment.content</div>
+            <div style="display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: 10px">
+                @for((comment, index) <- post.getComments.zipWithIndex) {
+                    <div style="display: flex;
+                        justify-content: space-between;
+                        align-items: start;
+                        height: 25px;
+                        ">
+                    @if(comment.user == "test") {
+                        <div><i>@comment.user:</i> @comment.content</div>
+                        @helper.form(action = routes.PostController.removeComment(post.getId, index)) {
+                            @helper.CSRF.formField
+                            <button type="submit">X</button>
+                        }
+                    } else {
+                        <div>@comment.user: @comment.content</div>
+                    }
+                    </div>
                 }
                 @helper.form(action = routes.PostController.addComment(post.getId)) {
                     @helper.CSRF.formField
-                    <label for="comment"></label>
-                    <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment"></textarea>
-                    <button type="submit">Submit Comment</button>
+                    <div style="display: flex;
+                        flex-direction: column">
+                        <label for="comment"></label>
+                        <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment"></textarea>
+                        <button style="align-self: flex-start" type="submit">Submit Comment</button>
+                    </div>
                 }
             </div>
         </div>

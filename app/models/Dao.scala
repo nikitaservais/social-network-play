@@ -15,7 +15,7 @@ object Dao {
       ZonedDateTime.parse("2023-12-29T11:00:11Z"),
       "My beautiful image",
       Seq(
-        Comment("user2", "Wow!"),
+        Comment("test", "Wow!"),
         Comment("bother1", "Cool this is !"),
         Comment("bother2", "Cool this is !"),
         Comment("bother3", "Cool this is !")
