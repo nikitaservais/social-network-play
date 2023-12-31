@@ -8,13 +8,13 @@ object Dao {
   )
   var posts: Seq[Post] = Seq(
     Post(
-      1,
-      "Paul",
-      Seq(Like("Paul", ZonedDateTime.parse("2023-12-29T12:32:12Z"))),
-      "images/test-image.jpeg",
-      ZonedDateTime.parse("2023-12-29T11:00:11Z"),
-      "My beautiful image",
-      Seq(
+      id = 1,
+      user = "Paul",
+      likes = Seq(Like("Paul", ZonedDateTime.parse("2023-12-29T12:32:12Z"))),
+      imagePath = "images/test-image.jpeg",
+      createdAt = ZonedDateTime.parse("2023-12-29T11:00:11Z"),
+      description = "My beautiful image",
+      comments = Seq(
         Comment("test", "Wow!"),
         Comment("bother1", "Cool this is !"),
         Comment("bother2", "Cool this is !"),
@@ -22,46 +22,46 @@ object Dao {
       )
     ),
     Post(
-      2,
-      "Paul",
-      Seq(Like("test", ZonedDateTime.parse("2023-12-29T12:32:12Z"))),
-      "images/test-image.jpeg",
-      ZonedDateTime.parse("2023-12-29T11:00:11Z"),
-      "My beautiful image",
-      Seq(
+      id = 2,
+      user = "Paul",
+      likes = Seq(Like("test", ZonedDateTime.parse("2023-12-29T12:32:12Z"))),
+      imagePath = "images/test-image.jpeg",
+      createdAt = ZonedDateTime.parse("2023-12-29T11:00:11Z"),
+      description = "My beautiful image",
+      comments = Seq(
         Comment("user2", "Wow!")
       )
     ),
     Post(
-      3,
-      "Paul",
-      Seq(Like("Paul", ZonedDateTime.parse("2023-12-29T12:32:12Z"))),
-      "images/test-image.jpeg",
-      ZonedDateTime.parse("2023-12-29T11:00:11Z"),
-      "My beautiful image",
-      Seq(
+      id = 3,
+      user = "Paul",
+      likes = Seq(Like("Paul", ZonedDateTime.parse("2023-12-29T12:32:12Z"))),
+      imagePath = "images/test-image.jpeg",
+      createdAt = ZonedDateTime.parse("2023-12-29T11:00:11Z"),
+      description = "My beautiful image",
+      comments = Seq(
         Comment("user2", "Wow!")
       )
     ),
     Post(
-      4,
-      "Paul",
-      Seq(Like("Paul", ZonedDateTime.parse("2023-12-29T12:32:12Z"))),
-      "images/test-image.jpeg",
-      ZonedDateTime.parse("2023-12-29T11:00:11Z"),
-      "My beautiful image",
-      Seq(
+      id = 4,
+      user = "Paul",
+      likes = Seq(Like("Paul", ZonedDateTime.parse("2023-12-29T12:32:12Z"))),
+      imagePath = "images/test-image.jpeg",
+      createdAt = ZonedDateTime.parse("2023-12-29T11:00:11Z"),
+      description = "My beautiful image",
+      comments = Seq(
         Comment("user2", "Wow!")
       )
     ),
     Post(
-      5,
-      "Paul",
-      Seq(Like("Paul", ZonedDateTime.parse("2023-12-29T12:32:12Z"))),
-      "images/test-image.jpeg",
-      ZonedDateTime.parse("2023-12-29T11:00:11Z"),
-      "My beautiful image",
-      Seq(
+      id = 5,
+      user = "Paul",
+      likes = Seq(Like("Paul", ZonedDateTime.parse("2023-12-29T12:32:12Z"))),
+      imagePath = "images/test-image.jpeg",
+      createdAt = ZonedDateTime.parse("2023-12-29T11:00:11Z"),
+      description = "My beautiful image",
+      comments = Seq(
         Comment("user2", "Wow!")
       )
     )

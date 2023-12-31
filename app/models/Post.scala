@@ -5,10 +5,10 @@ import java.time.ZonedDateTime
 class Post(
     id: Long,
     user: String,
-    var likes: Seq[Like],
     imagePath: String,
     createdAt: ZonedDateTime,
     description: String,
+    var likes: Seq[Like],
     var comments: Seq[Comment]
 ) {
   def getId: Long = id

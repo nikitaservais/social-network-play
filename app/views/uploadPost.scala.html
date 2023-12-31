@@ -1,0 +1,13 @@
+@()(implicit request: RequestHeader)
+    @request.flash.data.map { case (name, value) =>
+    <div>@name: @value</div>
+    }
+
+    @helper.form(action = routes.UploadPostController.upload(), Symbol("enctype") -> "multipart/form-data") {
+        @helper.CSRF.formField
+        <input type="file" name="picture"/>
+        <label for="description"></label>
+        <textarea id="description" name="description" placeholder="Write a description"></textarea>
+        <input type="submit">
+    }
+

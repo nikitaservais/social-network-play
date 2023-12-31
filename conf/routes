@@ -21,3 +21,6 @@ GET         /post/:id                      controllers.PostController.index(id: 
 POST        /post/:id/like                 controllers.PostController.pressedLike(id: Long)
 POST        /post/:id/addComment           controllers.PostController.addComment(id: Long)
 POST        /post/:id/deleteComment        controllers.PostController.removeComment(id: Long, commentIndex: Int)
+
+GET         /upload-post                   controllers.UploadPostController.index()
+POST        /upload-post                   controllers.UploadPostController.upload()
