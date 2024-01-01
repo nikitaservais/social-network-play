@@ -13,9 +13,37 @@ import javax.inject.*
 class FeedController @Inject() (val controllerComponents: ControllerComponents)
     extends BaseController {
 
-  def index(): Action[AnyContent] = Action {
+  def index(
+      sort: Option[String],
+      ord: Option[String]
+  ): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    val posts = PostDao.getAll()
+    sort match {
+      case Some("date") => {
+        var sortedPosts = posts.sortBy(_.getCreatedAt)
+        ord match {
+          case Some("desc") => sortedPosts = sortedPosts.reverse
+          case _            => sortedPosts = sortedPosts
+        }
+        Ok(views.html.feed(sortedPosts))
+      }
+      case Some("like") => {
+        var sortedPosts = posts.sortBy(_.likes.length)
+        ord match {
+          case Some("desc") => sortedPosts = sortedPosts.reverse
+          case _            => sortedPosts = sortedPosts
+        }
+        Ok(views.html.feed(sortedPosts))
+      }
+      case _ => Ok(views.html.feed(posts))
+    }
+
+  }
+
+  def filterByLikes(): Action[AnyContent] = Action {
     implicit request: Request[AnyContent] =>
       val posts = PostDao.getAll()
-      Ok(views.html.feed(posts))
+      val sortedPosts = posts.sortBy(_.likes.length)
+      Ok(views.html.feed(sortedPosts))
   }
 }

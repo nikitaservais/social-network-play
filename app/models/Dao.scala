@@ -10,9 +10,13 @@ object Dao {
     Post(
       id = 1,
       user = "Paul",
-      likes = Seq(Like("Paul", ZonedDateTime.parse("2023-12-29T12:32:12Z"))),
+      likes = Seq(
+        Like("Paul", ZonedDateTime.parse("2023-12-29T12:32:12Z")),
+        Like("user1", ZonedDateTime.parse("2023-12-29T12:32:12Z")),
+        Like("user2", ZonedDateTime.parse("2023-12-29T12:32:12Z"))
+      ),
       imagePath = "images/test-image.jpeg",
-      createdAt = ZonedDateTime.parse("2023-12-29T11:00:11Z"),
+      createdAt = ZonedDateTime.parse("2025-12-29T11:00:11Z"),
       description = "My beautiful image",
       comments = Seq(
         Comment("test", "Wow!"),
@@ -26,7 +30,7 @@ object Dao {
       user = "Paul",
       likes = Seq(Like("test", ZonedDateTime.parse("2023-12-29T12:32:12Z"))),
       imagePath = "images/test-image.jpeg",
-      createdAt = ZonedDateTime.parse("2023-12-29T11:00:11Z"),
+      createdAt = ZonedDateTime.parse("2001-12-29T11:00:11Z"),
       description = "My beautiful image",
       comments = Seq(
         Comment("user2", "Wow!")
@@ -57,7 +61,10 @@ object Dao {
     Post(
       id = 5,
       user = "Paul",
-      likes = Seq(Like("Paul", ZonedDateTime.parse("2023-12-29T12:32:12Z"))),
+      likes = Seq(
+        Like("Paul", ZonedDateTime.parse("2023-12-29T12:32:12Z")),
+        Like("user2", ZonedDateTime.parse("2023-12-29T12:32:12Z"))
+      ),
       imagePath = "images/test-image.jpeg",
       createdAt = ZonedDateTime.parse("2023-12-29T11:00:11Z"),
       description = "My beautiful image",
