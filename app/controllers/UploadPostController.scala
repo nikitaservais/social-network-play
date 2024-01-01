@@ -26,7 +26,7 @@ class UploadPostController @Inject() (
               val fileSize = picture.fileSize
               val contentType = picture.contentType
               val path = s"public/images/$filename"
-              picture.ref.moveTo(
+              picture.ref.copyTo(
                 Paths.get(path),
                 replace = true
               )
