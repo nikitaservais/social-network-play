@@ -14,8 +14,8 @@ class FeedController @Inject() (val controllerComponents: ControllerComponents)
     extends BaseController {
 
   def index(
-      sort: Option[String],
-      ord: Option[String]
+      sort: Option[String] = None,
+      ord: Option[String] = None
   ): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val posts = PostDao.getAll()
     sort match {
@@ -37,13 +37,19 @@ class FeedController @Inject() (val controllerComponents: ControllerComponents)
       }
       case _ => Ok(views.html.feed(posts))
     }
-
   }
 
-  def filterByLikes(): Action[AnyContent] = Action {
-    implicit request: Request[AnyContent] =>
-      val posts = PostDao.getAll()
-      val sortedPosts = posts.sortBy(_.likes.length)
-      Ok(views.html.feed(sortedPosts))
+  def likedPost(
+      postId: Long,
+      sort: Option[String] = None,
+      ord: Option[String] = None
+  ): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    PostDao.getById(postId) match
+      case Some(post) => {
+        post.userLike("test")
+        Redirect(routes.FeedController.index(sort, ord))
+
+      }
+      case None => BadRequest("Post not found")
   }
 }

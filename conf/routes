@@ -15,7 +15,8 @@ POST        /register                      controllers.RegisterController.regist
 GET         /login                         controllers.LoginController.login()
 POST        /login                         controllers.LoginController.processLogin()
 
-GET         /feed                          controllers.FeedController.index(sort: Option[String], ord: Option[String])
+GET         /feed                          controllers.FeedController.index(sort: Option[String]?=None, ord: Option[String] ?=None)
+POST        /feed/:id/like                 controllers.FeedController.likedPost(id: Long, sort: Option[String]?=None, ord: Option[String] ?=None)
 
 GET         /post/:id                      controllers.PostController.index(id: Long)
 POST        /post/:id/like                 controllers.PostController.pressedLike(id: Long)
