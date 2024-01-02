@@ -1,5 +1,4 @@
 package controllers
-
 import models.PostDao
 import play.api.*
 import play.api.mvc.*
@@ -46,7 +45,7 @@ class FeedController @Inject() (val controllerComponents: ControllerComponents)
   ): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     PostDao.getById(postId) match
       case Some(post) => {
-        post.userLike("test")
+        post.likedByUser(utils.getSessionUsername(request.session).get)
         Redirect(routes.FeedController.index(sort, ord))
 
       }

@@ -39,7 +39,7 @@ class AuthFilter @Inject() (implicit
   }
 
   private def isSessionValid(session: Session): Boolean = {
-    session.get(models.Global.SESSION_USERNAME_KEY) match {
+    utils.getSessionUsername(session) match {
       case Some(username) => UserDao.exists(username)
       case None           => false
     }

@@ -23,10 +23,7 @@ class PostController @Inject() (
   def pressedLike(id: Long): Action[AnyContent] = Action { implicit request =>
     PostDao.getById(id) match {
       case Some(post) => {
-        post.hasUserLiked("test") match {
-          case true  => post.removeLike("test")
-          case false => post.addLike("test")
-        }
+        post.likedByUser(utils.getSessionUsername(request.session).get)
         Redirect(routes.PostController.index(id))
       }
       case None => NotFound("Not Found")
@@ -35,7 +32,8 @@ class PostController @Inject() (
 
   def addComment(id: Long): Action[AnyContent] = Action { implicit request =>
     val commentContent = request.body.asFormUrlEncoded.get("comment").head
-    val comment = Comment("test", commentContent)
+    val comment =
+      Comment(utils.getSessionUsername(request.session).get, commentContent)
     PostDao.getById(id) match {
       case Some(post) => {
         post.addComment(comment)

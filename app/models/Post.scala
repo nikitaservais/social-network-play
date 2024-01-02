@@ -39,7 +39,7 @@ class Post(
     comments = comments.take(index) ++ comments.drop(index + 1)
   }
 
-  def userLike(username: String): Unit = {
+  def likedByUser(username: String): Unit = {
     this.hasUserLiked(username) match {
       case true  => this.removeLike(username)
       case false => this.addLike(username)

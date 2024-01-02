@@ -1,5 +1,4 @@
 package controllers
-
 import play.api.*
 import play.api.mvc.*
 
@@ -14,10 +13,6 @@ class HomeController @Inject() (val controllerComponents: ControllerComponents)
 
   def index(): Action[AnyContent] = Action {
     implicit request: Request[AnyContent] =>
-      request.session.get(models.Global.SESSION_USERNAME_KEY) match
-        case Some(username) =>
-          Redirect(routes.FeedController.index()).withSession(request.session)
-        case None =>
-          Redirect(routes.RegisterController.register())
+      Redirect(routes.FeedController.index())
   }
 }

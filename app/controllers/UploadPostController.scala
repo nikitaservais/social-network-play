@@ -39,7 +39,7 @@ class UploadPostController @Inject() (
         }
         val data = request.body.asMultipartFormData.get.asFormUrlEncoded
         val description = data("description").head
-        PostDao.create("test", description, imagePath.get)
+        PostDao.create(utils.getSessionUsername(request.session).get, description, imagePath.get)
         Redirect(routes.UploadPostController.index())
           .flashing("success" -> "File uploaded")
 

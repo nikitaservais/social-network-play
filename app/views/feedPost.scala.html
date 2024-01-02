@@ -27,7 +27,7 @@
             <div>@post.getLikes.length</div>
             @helper.form(action = routes.FeedController.likedPost(post.getId, request.getQueryString("sort"), request.getQueryString("ord"))) {
                 @helper.CSRF.formField
-                @if(post.hasUserLiked("test")) {
+                @if(post.hasUserLiked(utils.getSessionUsername(request.session).get)) {
                     @likeButtonLiked()
                 } else {
                     @likeButton()
