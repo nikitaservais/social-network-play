@@ -46,7 +46,6 @@ class RegisterController @Inject() (
             Redirect(routes.RegisterController.index()).flashing(
               s"INFO" -> s"User ${user.username} created successfully"
             )
-
           }
         )
     }

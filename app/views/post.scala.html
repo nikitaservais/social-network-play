@@ -4,6 +4,9 @@
 
 @main("Post") {
     @navbar("Post")
+    @request.flash.data.map { case (name, value) =>
+    <div>@name: @value</div>
+    }
     <div style="display: flex;
         padding: 50px">
         <div style="display: flex;

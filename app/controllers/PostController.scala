@@ -32,14 +32,20 @@ class PostController @Inject() (
 
   def addComment(id: Long): Action[AnyContent] = Action { implicit request =>
     val commentContent = request.body.asFormUrlEncoded.get("comment").head
-    val comment =
-      Comment(utils.getSessionUsername(request.session).get, commentContent)
-    PostDao.getById(id) match {
-      case Some(post) => {
-        post.addComment(comment)
-        Redirect(routes.PostController.index(id))
+    if (commentContent.isEmpty) {
+      Redirect(routes.PostController.index(id))
+        .flashing("error" -> "Comment cannot be empty")
+    } else {
+
+      val comment =
+        Comment(utils.getSessionUsername(request.session).get, commentContent)
+      PostDao.getById(id) match {
+        case Some(post) => {
+          post.addComment(comment)
+          Redirect(routes.PostController.index(id))
+        }
+        case None => NotFound("Not Found")
       }
-      case None => NotFound("Not Found")
     }
   }
 
