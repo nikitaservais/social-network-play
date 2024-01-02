@@ -11,11 +11,11 @@
     </div>
     <div style="display: flex;
         justify-content: center;
-        min-width: 50%
+        min-width: 60%
     ">
         <div>
             <div title="@displayDateTime(post.getCreatedAt)">Added on @displayDate(post.getCreatedAt) by @post.getUser</div>
-            <img src="@routes.Assets.versioned(post.getImagePath)" width="600" alt="placeholder"/>
+            <img src="@routes.Assets.versioned(post.getImagePath)" width="500" alt="placeholder"/>
         </div>
     </div>
     <div style="display: flex;
@@ -35,11 +35,15 @@
             }
         </div>
         <div style="flex-grow: 1">
-            <h4>Comments</h4>
-            <div>
-            @for(comment <- post.getComments.take(3)) {
-                <div>@comment.user: @comment.content</div>
-            }
+            <div style="display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: 10px">
+                <h4>Comments</h4>
+
+                @for(comment <- post.getComments.take(5)) {
+                    <div>@comment.user: @comment.content</div>
+                }
             </div>
         </div>
         <div style="">

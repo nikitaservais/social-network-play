@@ -22,7 +22,7 @@ class RegisterController @Inject() (
     )(User.apply)(User.unapply).verifying(
       "Username already exists",
       user => {
-        UserDao.exists(user.username)
+        !UserDao.exists(user.username)
       }
     )
   )
@@ -43,7 +43,7 @@ class RegisterController @Inject() (
           },
           user => {
             UserDao.create(user)
-            Redirect(routes.RegisterController.index()).flashing(
+            Redirect(routes.LoginController.index()).flashing(
               s"INFO" -> s"User ${user.username} created successfully"
             )
           }

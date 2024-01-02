@@ -28,7 +28,7 @@ class AuthFilter @Inject() (implicit
     ) match {
       case true => nextFilter(requestHeader)
       case false =>
-        Future.successful(Results.Redirect(routes.RegisterController.index()))
+        Future.successful(Results.Redirect(routes.LoginController.index()))
     }
 
   }

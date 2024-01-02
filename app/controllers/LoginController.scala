@@ -25,11 +25,9 @@ class LoginController @Inject() (
       )
   )
 
-  private val formSubmitUrl = routes.LoginController.processLogin()
-
   def index(): Action[AnyContent] = {
     Action { implicit request: MessagesRequest[AnyContent] =>
-      Ok(views.html.login(form, formSubmitUrl))
+      Ok(views.html.login(form))
     }
   }
 
@@ -37,7 +35,7 @@ class LoginController @Inject() (
     Action { implicit request: MessagesRequest[AnyContent] =>
       {
         val errorFunction = { (formWithErrors: Form[User]) =>
-          BadRequest(views.html.login(formWithErrors, formSubmitUrl))
+          BadRequest(views.html.login(formWithErrors))
         }
         val successFunction = { (user: User) =>
           {
@@ -54,11 +52,4 @@ class LoginController @Inject() (
       }
     }
   }
-
-  private def lengthIsGreaterThanNCharacters(s: String, n: Int): Boolean =
-    if s.length > n then true else false
-
-  private def lengthIsLessThanNCharacters(s: String, n: Int): Boolean =
-    if s.length < n then true else false
-
 }
