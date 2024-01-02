@@ -1,67 +1,69 @@
 @import utils.*
 
 @(post: Post)(implicit request: RequestHeader)
+
 <div style="display: flex;
-    justify-content: space-evenly;
-    align-items: start;
-    align-content: start">
-    <div>
-        <div>
-            <div title="@displayDateTime(post.getCreatedAt)">Added on @displayDate(post.getCreatedAt) by @post.getUser</div>
-            <img src="@routes.Assets.versioned(post.getImagePath)" width="400px" alt="placeholder"/>
+    padding: 50px">
+    <div style="display: flex;
+        justify-content: center;
+        min-width: 70%">
+        <div style="display: flex;
+            flex-direction: column">
+            <div style="display: flex;
+                justify-content: space-between">
+                <div title="@displayDateTime(post.getCreatedAt)">
+                    Added on @displayDate(post.getCreatedAt) by @post.getUser</div>
+                <div style="display: flex">
+                    <div>@post.getLikes.length</div>
+                    @helper.form(action = routes.PostController.pressedLike(post.getId)) {
+                        @helper.CSRF.formField
+                        @if(post.hasUserLiked(utils.getSessionUsername(request.session).get)) {
+                            @likeButtonLiked()
+                        } else {
+                            @likeButton()
+                        }
+                    }
+                </div>
+            </div>
+            <img src="@routes.Assets.versioned(post.getImagePath)" width="800px" alt="placeholder"/>
         </div>
     </div>
-    <div>
+    <div style="min-width: 30%">
         <div>
-            <h2>Description</h2>
+            <h4>Description</h4>
             <p>@post.getDescription</p>
         </div>
-        <div>
-            <h2>Comments</h2>
+        <h4>Comments</h4>
+        @helper.form(action = routes.PostController.addComment(post.getId)) {
+            @helper.CSRF.formField
             <div style="display: flex;
-                align-items: center">
-                <div>@post.getLikes.length </div>
-                @helper.form(action = routes.PostController.pressedLike(post.getId)) {
-                    @helper.CSRF.formField
-                    @if(post.hasUserLiked(utils.getSessionUsername(request.session).get)) {
-                        @likeButtonLiked()
-                    } else {
-                        @likeButton()
-                    }
-                }
+                flex-direction: column">
+                <label for="comment"></label>
+                <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment"></textarea>
+                <button style="align-self: flex-start" type="submit">Submit Comment</button>
             </div>
-        </div>
+        }
         <div>
             <div style="display: flex;
                 flex-direction: column;
                 justify-content: space-between;
                 gap: 10px">
-                @for((comment, index) <- post.getComments.zipWithIndex) {
-                    <div style="display: flex;
-                        justify-content: space-between;
-                        align-items: start;
-                        height: 25px;
+            @for((comment, index) <- post.getComments.zipWithIndex) {
+                <div style="display: flex;
+                    justify-content: space-between;
+                    align-items: start;
+                    height: 25px;
                         ">
+                    <div><i>@comment.user:</i>
+                        @comment.content</div>
                     @if(comment.user == utils.getSessionUsername(request.session).get) {
-                        <div><i>@comment.user:</i> @comment.content</div>
                         @helper.form(action = routes.PostController.removeComment(post.getId, index)) {
                             @helper.CSRF.formField
                             <button type="submit">X</button>
                         }
-                    } else {
-                        <div>@comment.user: @comment.content</div>
                     }
-                    </div>
-                }
-                @helper.form(action = routes.PostController.addComment(post.getId)) {
-                    @helper.CSRF.formField
-                    <div style="display: flex;
-                        flex-direction: column">
-                        <label for="comment"></label>
-                        <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Write a comment"></textarea>
-                        <button style="align-self: flex-start" type="submit">Submit Comment</button>
-                    </div>
-                }
+                </div>
+            }
             </div>
         </div>
     </div>

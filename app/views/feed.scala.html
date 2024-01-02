@@ -1,47 +1,46 @@
 @(posts: Seq[Post])(implicit request: RequestHeader)
-    @main("Feed") {
-        <h1>Feed</h1>
-        <div style="display: flex;
-            gap: 10px">
-            @if(request.getQueryString("sort").getOrElse("") == "date") {
-                <a href="@routes.FeedController.index(None, None)">
-                    <button style="background-color: #4CAF50">Filter by date</button>
+@main("Feed") {
+    <div style="display: flex;
+        gap: 10px">
+        @if(request.getQueryString("sort").getOrElse("") == "date") {
+            <a href="@routes.FeedController.index(None, None)">
+                <button style="background-color: #4CAF50">Filter by date</button>
+            </a>
+        } else {
+            <a href="@routes.FeedController.index(Some("date"), request.getQueryString("ord"))">
+                <button>Filter by date</button>
+            </a>
+        }
+        @if(request.getQueryString("sort").getOrElse("") == "like") {
+            <a href="@routes.FeedController.index(None, None)">
+                <button style="background-color: #4CAF50">Filter by likes</button>
+            </a>
+        } else {
+            <a href="@routes.FeedController.index(Some("like"), request.getQueryString("ord"))">
+                <button>Filter by likes</button>
+            </a>
+        }
+        @if(request.getQueryString("sort").getOrElse("") == "date" || request.getQueryString("sort").getOrElse("") == "like") {
+            @if(request.getQueryString("ord").getOrElse("") == "desc") {
+                <a href="@routes.FeedController.index(request.getQueryString("sort"), Some("asc"))">
+                    <button style="background-color: #4CAF50">Desc</button>
                 </a>
             } else {
-                <a href="@routes.FeedController.index(Some("date"), request.getQueryString("ord"))">
-                    <button>Filter by date</button>
+                <a href="@routes.FeedController.index(request.getQueryString("sort"), Some("desc"))">
+                    <button style="background-color: #4CAF50">Asc</button>
                 </a>
             }
-            @if(request.getQueryString("sort").getOrElse("") == "like") {
-                <a href="@routes.FeedController.index(None, None)">
-                    <button style="background-color: #4CAF50">Filter by likes</button>
-                </a>
-            } else {
-                <a href="@routes.FeedController.index(Some("like"), request.getQueryString("ord"))">
-                    <button>Filter by likes</button>
-                </a>
+        }
+    </div>
+    <div style="display: flex;
+        flex-direction: column;
+        gap: 20px">
+        <table >
+            <tbody>
+            @for(post <- posts) {
+                @feedPost(post)
             }
-            @if(request.getQueryString("sort").getOrElse("") == "date" || request.getQueryString("sort").getOrElse("") == "like") {
-                @if(request.getQueryString("ord").getOrElse("") == "desc") {
-                    <a href="@routes.FeedController.index(request.getQueryString("sort"), Some("asc"))">
-                        <button style="background-color: #4CAF50">Desc</button>
-                    </a>
-                } else {
-                    <a href="@routes.FeedController.index(request.getQueryString("sort"), Some("desc"))">
-                        <button style="background-color: #4CAF50">Asc</button>
-                    </a>
-                }
-            }
-        </div>
-        <div style="display: flex;
-            flex-direction: column;
-            gap: 20px">
-            <table >
-                <tbody>
-                @for(post <- posts) {
-                    @feedPost(post)
-                }
-                </tbody>
-            </table>
-        </div>
-    }
+            </tbody>
+        </table>
+    </div>
+}
