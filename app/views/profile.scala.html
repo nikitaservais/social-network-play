@@ -1,0 +1,8 @@
+@()(implicit request: RequestHeader)
+@main("Profile") {
+    @navbar("Profile")
+    <div >
+        <p>Here you can see your profile information.</p>
+        <p>Username: @request.session.get("username").get</p>
+    </div>
+}
