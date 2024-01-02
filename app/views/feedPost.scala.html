@@ -3,45 +3,49 @@
 @(post: Post)(implicit request: RequestHeader)
 
 <div style="display: flex;
-    justify-content: space-evenly;
-    align-items: start;
-    align-content: start">
-    <div >
-        <h2>Description</h2>
+    justify-content: space-between;
+    padding: 50px">
+    <div style="min-width: 20%;">
+        <h4>Description</h4>
         <p>@post.getDescription</p>
     </div>
-    <div>
+    <div style="display: flex;
+        justify-content: center;
+        min-width: 50%
+    ">
         <div>
             <div title="@displayDateTime(post.getCreatedAt)">Added on @displayDate(post.getCreatedAt) by @post.getUser</div>
-            <img src="@routes.Assets.versioned(post.getImagePath)" width="400px" alt="placeholder"/>
+            <img src="@routes.Assets.versioned(post.getImagePath)" width="600" alt="placeholder"/>
         </div>
     </div>
-    <div>
-        <div>
-            <h2>Comments</h2>
-            <div style="display: flex;
-                align-items: center">
-                <div>@post.getLikes.length </div>
-                @helper.form(action = routes.FeedController.likedPost(post.getId, request.getQueryString("sort"), request.getQueryString("ord"))) {
-                    @helper.CSRF.formField
-                    @if(post.hasUserLiked("test")) {
-                        @likeButtonLiked()
-                    } else {
-                        @likeButton()
-                    }
+    <div style="display: flex;
+        flex-direction: column;
+        min-width: 20%;
+        padding-top: 20px;
+        padding-bottom: 20px">
+        <div style="display: flex">
+            <div>@post.getLikes.length</div>
+            @helper.form(action = routes.FeedController.likedPost(post.getId, request.getQueryString("sort"), request.getQueryString("ord"))) {
+                @helper.CSRF.formField
+                @if(post.hasUserLiked("test")) {
+                    @likeButtonLiked()
+                } else {
+                    @likeButton()
                 }
+            }
+        </div>
+        <div style="flex-grow: 1">
+            <h4>Comments</h4>
+            <div>
+            @for(comment <- post.getComments.take(3)) {
+                <div>@comment.user: @comment.content</div>
+            }
             </div>
         </div>
-        <div>
-            <div>
-                @for(comment <- post.getComments.take(3)) {
-                    <div>@comment.user: @comment.content</div>
-                }
-                @if(post.getComments.length > 3) {
-                    <button>See More</button>
-                }
-
-            </div>
+        <div style="">
+            <a href="@routes.PostController.index(post.getId)">
+                <button>See More</button>
+            </a>
         </div>
     </div>
 </div>

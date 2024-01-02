@@ -33,11 +33,15 @@
                 }
             }
         </div>
-        <table >
-            <tbody>
-            @for(post <- posts) {
-                @feedPost(post)
-            }
-            </tbody>
-        </table>
+        <div style="display: flex;
+            flex-direction: column;
+            gap: 20px">
+            <table >
+                <tbody>
+                @for(post <- posts) {
+                    @feedPost(post)
+                }
+                </tbody>
+            </table>
+        </div>
     }
