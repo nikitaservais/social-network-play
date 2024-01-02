@@ -1,10 +1,9 @@
 package controllers
 
-import models.PostDao
-
-import javax.inject.*
 import play.api.*
 import play.api.mvc.*
+
+import javax.inject.*
 
 /** This controller creates an `Action` to handle HTTP requests to the
   * application's home page.
@@ -13,14 +12,12 @@ import play.api.mvc.*
 class HomeController @Inject() (val controllerComponents: ControllerComponents)
     extends BaseController {
 
-  /** Create an Action to render an HTML page.
-    *
-    * The configuration in the `routes` file means that this method
-    * will be called when the application receives a `GET` request with
-    * a path of `/`.
-    */
   def index(): Action[AnyContent] = Action {
     implicit request: Request[AnyContent] =>
-      Ok(views.html.index())
+      request.session.get(models.Global.SESSION_USERNAME_KEY) match
+        case Some(username) =>
+          Redirect(routes.FeedController.index()).withSession(request.session)
+        case None =>
+          Redirect(routes.RegisterController.register())
   }
 }

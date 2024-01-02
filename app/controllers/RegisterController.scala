@@ -22,7 +22,7 @@ class RegisterController @Inject() (
     )(User.apply)(User.unapply).verifying(
       "Username already exists",
       user => {
-        UserDao.validate(user)
+        UserDao.exists(user.username)
       }
     )
   )
