@@ -27,7 +27,7 @@ class LoginController @Inject() (
 
   private val formSubmitUrl = routes.LoginController.processLogin()
 
-  def login(): Action[AnyContent] = {
+  def index(): Action[AnyContent] = {
     Action { implicit request: MessagesRequest[AnyContent] =>
       Ok(views.html.login(form, formSubmitUrl))
     }

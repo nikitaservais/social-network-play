@@ -27,7 +27,7 @@ class RegisterController @Inject() (
     )
   )
 
-  def register(): Action[AnyContent] = {
+  def index(): Action[AnyContent] = {
     Action { implicit request: MessagesRequest[AnyContent] =>
       Ok(views.html.register(userForm))
     }
@@ -43,7 +43,7 @@ class RegisterController @Inject() (
           },
           user => {
             UserDao.create(user)
-            Redirect(routes.RegisterController.register()).flashing(
+            Redirect(routes.RegisterController.index()).flashing(
               s"INFO" -> s"User ${user.username} created successfully"
             )
 

@@ -1,0 +1,17 @@
+@(title: String)
+<div style="
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -20px;
+">
+    <h1>@title</h1>
+    <nav style="
+        display: flex;
+        gap: 20px
+    ">
+        <a href="@routes.UploadPostController.index()">Share a picture</a>
+        <a href="@routes.HomeController.index()">Profile</a>
+        <a href="@routes.HomeController.logout()">Logout</a>
+    </nav>
+</div>

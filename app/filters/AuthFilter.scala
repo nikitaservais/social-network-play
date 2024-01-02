@@ -13,7 +13,8 @@ class AuthFilter @Inject() (implicit
     ec: ExecutionContext
 ) extends Filter {
   private val allowedUnAuthUrls: Seq[String] = Seq(
-    routes.RegisterController.register().url
+    routes.RegisterController.index().url,
+    routes.LoginController.index().url
   )
 
   override def apply(
@@ -22,20 +23,14 @@ class AuthFilter @Inject() (implicit
     if (allowedUnAuthUrls.contains(requestHeader.uri)) {
       return nextFilter(requestHeader)
     }
-    nextFilter(requestHeader)
-  }
-
-  private def checkSession(
-      requestHeader: RequestHeader,
-      nextFilter: RequestHeader => Future[Result]
-  ): Future[Result] = {
     isSessionValid(
       requestHeader.session
     ) match {
       case true => nextFilter(requestHeader)
       case false =>
-        Future.successful(Results.Redirect(routes.LoginController.login()))
+        Future.successful(Results.Redirect(routes.RegisterController.index()))
     }
+
   }
 
   private def isSessionValid(session: Session): Boolean = {

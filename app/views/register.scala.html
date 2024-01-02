@@ -1,24 +1,27 @@
-@import helper._
+@import helper.*
 
 @(userForm: Form[User])(implicit request: MessagesRequestHeader)
-@request.flash.data.map{ case (name, value) =>
-<div>@name: @value</div>
-}
-
-@if(userForm.hasGlobalErrors) {
-    @if(userForm.globalErrors.size == 1) {
-        <p>@userForm.globalErrors.head.format</p>
-    } else {
-        <ul>
-        @for(error <- userForm.globalErrors) {
-            <li>@error.format</li>
+    @main("Register") {
+        @request.flash.data.map { case (name, value) =>
+        <div>@name: @value</div>
         }
-        </ul>
-    }
-}
 
-@form(action = routes.RegisterController.registerSubmit()) {
-    @inputText(userForm("username"))
-    @inputPassword(userForm("password"))
-    <input type="submit" value="Save">
-}
+        @if(userForm.hasGlobalErrors) {
+            @if(userForm.globalErrors.size == 1) {
+                <p>@userForm.globalErrors.head.format</p>
+            } else {
+                <ul>
+                @for(error <- userForm.globalErrors) {
+                    <li>@error.format</li>
+                }
+                </ul>
+            }
+        }
+
+        @form(action = routes.RegisterController.registerSubmit()) {
+            @inputText(userForm("username"))
+            @inputPassword(userForm("password"))
+            <input type="submit" value="Submit">
+            <a href="@routes.LoginController.index()">Login</a>
+        }
+    }
