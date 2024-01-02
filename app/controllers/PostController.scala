@@ -34,7 +34,7 @@ class PostController @Inject() (
     val commentContent = request.body.asFormUrlEncoded.get("comment").head
     if (commentContent.isEmpty) {
       Redirect(routes.PostController.index(id))
-        .flashing("error" -> "Comment cannot be empty")
+        .flashing("Error" -> "Comment cannot be empty")
     } else {
 
       val comment =

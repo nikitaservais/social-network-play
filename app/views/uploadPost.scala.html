@@ -1,13 +1,30 @@
 @()(implicit request: RequestHeader)
-    @request.flash.data.map { case (name, value) =>
-    <div>@name: @value</div>
+    @main("Upload") {
+        @navbar("Upload")
+        @request.flash.data.map { case (name, value) =>
+        <div>@name: @value</div>
+        }
+        <div style="display: flex;
+            justify-content: center;
+            padding: 70px">
+        @helper.form(action = routes.UploadPostController.upload(), Symbol("enctype") -> "multipart/form-data") {
+            @helper.CSRF.formField
+            <div style="display: flex;
+                flex-direction: column;
+                gap: 20px;
+                justify-content: center">
+                <input type="file" name="picture"/>
+                <div style="display: flex;
+                    gap: 25px;
+                    ">
+                    <label for="description">Description</label>
+                    <textarea style="width: 500px;
+                        height: 500px" id="description" rows="10" cols="10" name="description" placeholder="Write a description"></textarea>
+                </div>
+                <div style="">
+                    <input type="submit">
+                </div>
+            </div>
+        }
+        </div>
     }
-
-    @helper.form(action = routes.UploadPostController.upload(), Symbol("enctype") -> "multipart/form-data") {
-        @helper.CSRF.formField
-        <input type="file" name="picture"/>
-        <label for="description"></label>
-        <textarea id="description" name="description" placeholder="Write a description"></textarea>
-        <input type="submit">
-    }
-
