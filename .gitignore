@@ -2,3 +2,5 @@ target
 /.bsp
 /logs
 /RUNNING_PID
+doc/aux
+doc/out
