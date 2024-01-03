@@ -2,6 +2,21 @@ package models
 
 import java.time.ZonedDateTime
 
+/** @param id
+  *   Post id
+  * @param user
+  *   User who posted
+  * @param imagePath
+  *   Path to image file
+  * @param createdAt
+  *   Time of creation
+  * @param description
+  *   Description of post
+  * @param likes
+  *   Likes on post
+  * @param comments
+  *   Comments on post
+  */
 class Post(
     id: Long,
     user: String,
@@ -27,8 +42,25 @@ class Post(
     likes = likes.filterNot(_.user == username)
   }
 
+  /** Checks if a user has liked a post
+    * @param username
+    *   User to check
+    * @return
+    *   True if user has liked post, false otherwise
+    */
   def hasUserLiked(username: String): Boolean = {
     likes.exists(_.user == username)
+  }
+
+  /** Toggles a like on a post by a user
+    * @param username
+    *   User to toggle like for
+    */
+  def likedByUser(username: String): Unit = {
+    this.hasUserLiked(username) match {
+      case true  => this.removeLike(username)
+      case false => this.addLike(username)
+    }
   }
 
   def addComment(comment: Comment): Unit = {
@@ -39,10 +71,4 @@ class Post(
     comments = comments.take(index) ++ comments.drop(index + 1)
   }
 
-  def likedByUser(username: String): Unit = {
-    this.hasUserLiked(username) match {
-      case true  => this.removeLike(username)
-      case false => this.addLike(username)
-    }
-  }
 }

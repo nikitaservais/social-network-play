@@ -2,6 +2,9 @@ package models
 
 import java.time.ZonedDateTime
 
+/** This represents the instance of the database. It stores mock data for the
+  * application.
+  */
 object Dao {
   var users: Seq[User] = Seq(
     User("Paul Atreides", "muaddib"),
@@ -30,7 +33,7 @@ object Dao {
         Like("Thufir Hawat", utils.randomDateTime()),
         Like("Gurney Halleck", utils.randomDateTime())
       ),
-      imagePath = "images/arriving-arrakis.png",
+      imagePath = s"${models.Global.PUBLIC_IMAGES_PATH}/arriving-arrakis.png",
       createdAt = utils.randomDateTime(),
       description =
         "First steps on the sands of Dune. The twin suns witness our resolve. We're ready to face what comes next, together. #Arrakis #NewBeginnings",
@@ -50,7 +53,7 @@ object Dao {
       id = 2,
       user = "Baron Harkonnen",
       likes = Seq(Like("Thufir Hawat", utils.randomDateTime())),
-      imagePath = "images/baron-plot.png",
+      imagePath = s"${models.Global.PUBLIC_IMAGES_PATH}/baron-plot.png",
       createdAt = utils.randomDateTime(),
       description =
         "Plotting the next big move. Power waits for no one. #HarkonnenRise #GiediPrime",
@@ -65,7 +68,7 @@ object Dao {
         Like("Paul Atreides", utils.randomDateTime()),
         Like("Alia Atreides", utils.randomDateTime())
       ),
-      imagePath = "images/arrakeen-siege.png",
+      imagePath = s"${models.Global.PUBLIC_IMAGES_PATH}/arrakeen-siege.png",
       createdAt = utils.randomDateTime(),
       description =
         "We stand united - a storm brewing against the horizon. Arrakis will be free. #Fremen #ArrakisRising",
@@ -81,7 +84,7 @@ object Dao {
         Like("Duncan Idaho", utils.randomDateTime()),
         Like("Paul Atreides", utils.randomDateTime())
       ),
-      imagePath = "images/training.png",
+      imagePath = s"${models.Global.PUBLIC_IMAGES_PATH}/training.png",
       createdAt = utils.randomDateTime(),
       description =
         "Another day, another training session. The desert's heat forges the strongest warriors. #TrainingDay #ArrakisTough",
@@ -94,7 +97,7 @@ object Dao {
       id = 5,
       user = "Dr. Yueh",
       likes = Seq(Like("Baron Harkonnen", utils.randomDateTime())),
-      imagePath = "images/yueh.png",
+      imagePath = s"${models.Global.PUBLIC_IMAGES_PATH}/yueh.png",
       createdAt = utils.randomDateTime(),
       description =
         "A choice that weighs heavily. The path ahead is fraught with shadows. #DifficultDecisions #TheDoctor'sDilemma",
@@ -106,7 +109,7 @@ object Dao {
       id = 6,
       user = "Princess Irulan",
       likes = Seq(Like("Lady Jessica", utils.randomDateTime())),
-      imagePath = "images/irulan.png",
+      imagePath = s"${models.Global.PUBLIC_IMAGES_PATH}/irulan.png",
       createdAt = utils.randomDateTime(),
       description =
         "Documenting the epic saga. Words carry the weight of worlds. #MuadDibChronicles #HistoryUnfolds",
@@ -121,7 +124,7 @@ object Dao {
         Like("Paul Atreides", utils.randomDateTime()),
         Like("Alia Atreides", utils.randomDateTime())
       ),
-      imagePath = "images/jessica.png",
+      imagePath = s"${models.Global.PUBLIC_IMAGES_PATH}/jessica.png",
       createdAt = utils.randomDateTime(),
       description =
         "Embracing the trials of Arrakis. The Bene Gesserit way lights our path. #StrengthAndWisdom #MotherOfMuadDib",
@@ -140,7 +143,7 @@ object Dao {
         Like("Paul Atreides", utils.randomDateTime()),
         Like("Lady Jessica", utils.randomDateTime())
       ),
-      imagePath = "images/thufir.png",
+      imagePath = s"${models.Global.PUBLIC_IMAGES_PATH}/thufir.png",
       createdAt = utils.randomDateTime(),
       description =
         "Analyzing and strategizing every angle. Arrakis won't know what hit it. #MentatMind #HouseAtreidesStrategist",

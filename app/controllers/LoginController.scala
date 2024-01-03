@@ -20,7 +20,7 @@ class LoginController @Inject() (
       .verifying(
         "Invalid username/password",
         user => {
-          User.loginAttempt(user)
+          User.verifyUser(user)
         }
       )
   )

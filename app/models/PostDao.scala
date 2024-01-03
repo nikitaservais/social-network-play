@@ -11,6 +11,16 @@ object PostDao {
     posts.find((post: Post) => post.getId == id)
   }
 
+  /** Create a new post in the database
+    * @param user
+    *   The user who created the post
+    * @param description
+    *   The description of the post
+    * @param fileName
+    *   The name of the file uploaded
+    * @return
+    *   The post created
+    */
   def create(user: String, description: String, fileName: String): Post = {
     val lastIndex = posts.lastOption.maxByOption(_.getId)
     val id = lastIndex match {
@@ -20,7 +30,7 @@ object PostDao {
     val post = Post(
       id,
       user = user,
-      imagePath = s"images/$fileName",
+      imagePath = s"${models.Global.PUBLIC_IMAGES_PATH}/$fileName",
       description = description,
       createdAt = ZonedDateTime.now(),
       likes = Seq(),
