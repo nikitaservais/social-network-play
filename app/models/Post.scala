@@ -19,11 +19,11 @@ class Post(
   def getDescription: String = description
   def getComments: Seq[Comment] = comments
 
-  def addLike(username: String): Unit = {
+  private def addLike(username: String): Unit = {
     likes = likes :+ Like(username)
   }
 
-  def removeLike(username: String): Unit = {
+  private def removeLike(username: String): Unit = {
     likes = likes.filterNot(_.user == username)
   }
 

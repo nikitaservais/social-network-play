@@ -1,5 +1,3 @@
-@import utils.*
-
 @(post: Post)(implicit request: RequestHeader)
 
 @main("Post") {
@@ -16,8 +14,8 @@
                 flex-direction: column">
                 <div style="display: flex;
                     justify-content: space-between">
-                    <div title="@displayDateTime(post.getCreatedAt)">
-                        Added on @displayDate(post.getCreatedAt) by @post.getUser</div>
+                    <div title="@utils.displayDateTime(post.getCreatedAt)">
+                        Added on @utils.displayDate(post.getCreatedAt) by @post.getUser</div>
                     <div style="display: flex">
                         <div>@post.getLikes.length</div>
                         @helper.form(action = routes.PostController.pressedLike(post.getId)) {

@@ -1,5 +1,3 @@
-@import utils.*
-
 @(post: Post)(implicit request: RequestHeader)
 
 <div style="display: flex;
@@ -14,7 +12,8 @@
         min-width: 60%
     ">
         <div>
-            <div title="@displayDateTime(post.getCreatedAt)">Added on @displayDate(post.getCreatedAt) by @post.getUser</div>
+            <div title="@utils.displayDateTime(post.getCreatedAt)">
+                Added on @utils.displayDate(post.getCreatedAt) by @post.getUser</div>
             <img src="@routes.Assets.versioned(post.getImagePath)" width="500" alt="placeholder"/>
         </div>
     </div>

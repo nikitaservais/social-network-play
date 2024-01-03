@@ -1,5 +1,5 @@
 package controllers
-import models.PostDao
+import models.{Post, PostDao}
 import play.api.*
 import play.api.mvc.*
 
@@ -20,18 +20,12 @@ class FeedController @Inject() (val controllerComponents: ControllerComponents)
     sort match {
       case Some("date") => {
         var sortedPosts = posts.sortBy(_.getCreatedAt)
-        ord match {
-          case Some("desc") => sortedPosts = sortedPosts.reverse
-          case _            => sortedPosts = sortedPosts
-        }
+        sortedPosts = orderPosts(sortedPosts, ord)
         Ok(views.html.feed(sortedPosts))
       }
       case Some("like") => {
         var sortedPosts = posts.sortBy(_.likes.length)
-        ord match {
-          case Some("desc") => sortedPosts = sortedPosts.reverse
-          case _            => sortedPosts = sortedPosts
-        }
+        sortedPosts = orderPosts(sortedPosts, ord)
         Ok(views.html.feed(sortedPosts))
       }
       case _ => Ok(views.html.feed(posts))
@@ -51,4 +45,13 @@ class FeedController @Inject() (val controllerComponents: ControllerComponents)
       }
       case None => BadRequest("Post not found")
   }
+
+  private def orderPosts(
+      posts: Seq[Post],
+      ord: Option[String]
+  ): Seq[Post] =
+    ord match {
+      case Some("desc") => posts.reverse
+      case _            => posts
+    }
 }
