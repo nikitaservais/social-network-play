@@ -1,6 +1,6 @@
 package models
 
-case class User(username: String, password: String) // TODO: hash password
+case class User(username: String, password: String)
 
 object User {
   def unapply(user: User): Option[(String, String)] = {
