@@ -25,28 +25,32 @@
 
     The \textbf{User} model represents the users of the application.
     It consists of a username and a password.
-    For security reasons, it would be advisable to hash the password before storing it.
+    For security reasons, it would be advisable to implementing a hash for the password before storing it.
 
     The \textbf{Post} model represents the posts that users create and share on the platform.
-    Each post has an ID, the username of the user who posted it, the path to the image of the post, the date of creation, a description, a list of likes, and a list of comments.
+    Each post has an ID, the username of the user who posted it, the file path to the image of the post, the date of creation, a description, a list of likes, and a list of comments.
 
-    
-    The \textbf{comment} model represents the comments that users leave on posts.
+
+    The \textbf{Comment} model represents the comments that users leave on posts.
     Each comment has the username of the user who commented and the content of the comment.
 
     A Data Access Object (DAO) layer is used to interface with the database.
+    This is used to retrieve and store the objects in the database.
     In this case, there is no database, so the objects are stored in memory.
 
 
     \section{Controllers}
-    The application has several controllers, each corresponding to a view.
-    There is a \textbf{HomeController} that redirects to the feed and can log out the user.
+    The application has a controller for each corresponding to a view.
+    There is also a \textbf{HomeController} that redirects to the feed and can log out the user.
     Each controller has an index method to show the view of the page.
     For each possible action on the page, there is a method to manage that action.
+    For example, the \textbf{FeedController} has a method to handle like a post by the user.
+    It will retrieve the post from the database, add the user to the list of likes, and update the post in the database (this is done by reference, as there is no database).
 
 
     \section{Views}
     The views of the application are represented by HTML templates.
+    This make use of the templating engine of the Play framework.
     These templates are rendered by the controllers and presented to the users.
     The views include a registration page, a login page, a feed page, a profile page, an upload page, and a post page.
 
