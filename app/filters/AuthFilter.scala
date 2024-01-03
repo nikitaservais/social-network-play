@@ -8,6 +8,9 @@ import play.api.mvc.*
 import javax.inject.*
 import scala.concurrent.{ExecutionContext, Future}
 
+/** This is a filter for the application to check if the user is logged in or not. If the user is not logged in, then
+ * the user will be redirected to the login page.
+  */
 class AuthFilter @Inject() (implicit
     val mat: Materializer,
     ec: ExecutionContext

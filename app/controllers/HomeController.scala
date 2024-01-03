@@ -15,6 +15,6 @@ class HomeController @Inject() (val controllerComponents: ControllerComponents)
 
   def logout(): Action[AnyContent] = Action {
     implicit request: Request[AnyContent] =>
-      Redirect(routes.RegisterController.index()).withNewSession
+      Redirect(routes.LoginController.index()).withNewSession
   }
 }

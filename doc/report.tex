@@ -47,6 +47,12 @@
     For example, the \textbf{FeedController} has a method to handle like a post by the user.
     It will retrieve the post from the database, add the user to the list of likes, and update the post in the database (this is done by reference, as there is no database).
 
+    \subsection{Authentication}
+    The authentication is done using a session.
+    When a user logs in, the username is stored in the session.
+    A filter is used to check if the user is logged in before accessing a page.
+    If the user is not logged in, they are redirected to the login page.
+
 
     \section{Views}
     The views of the application are represented by HTML templates.
